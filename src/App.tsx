@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import './App.css'
+import { ChakraProvider, Flex, Box } from '@chakra-ui/react'
 import Header from './components/header'
-import { ChakraProvider } from '@chakra-ui/react'
+import Footer from './components/footer'
+import MainArea from './components/mainArea'
 
 
 function App() {
@@ -9,11 +11,29 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Header
-        score={0}
-        highScore={0}
-        onGenreChange={() => (null)}
-      />
+      <Flex direction="column" height="100vh">
+
+        {/* Header */}
+        <Box height="84px">
+          <Header
+            score={0}
+            highScore={0}
+            onGenreChange={() => (null)}
+          >
+          </Header>
+        </Box>
+
+        {/* Main Area */}
+        <Box flex="1" overflow={"auto"} bg="#456">
+          <MainArea></MainArea>
+        </Box>
+
+        {/* Footer */}
+        <Box height="40px">
+          <Footer></Footer>
+        </Box>
+
+      </Flex>
     </ChakraProvider>
   )
 }
