@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Select, Spacer } from '@chakra-ui/react';
+import { Flex, Box, Text, Select } from '@chakra-ui/react';
 
 interface Headers {
     score: number;
@@ -8,47 +8,58 @@ interface Headers {
 
 const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
     return (
-        <Flex
-            as="header"
-            align="center"
+        <Box
+            height="80px"
             bg="#14181c"
-            color="white"
-            px={6}
-            py={6}
+            color={"#f4fcf0"}
         >
+            <Flex
+                justify={"center"}
+                align={"center"}
+                gap={8}
+                height={"100%"}
+            >
 
-            {/* Score */}
-            <Box >
-                <Text fontSize="lg" color="orange.400">
-                    Score: <Text as="span" color="orange.400">{score}</Text>
-                </Text>
-            </Box>
-            <Spacer />
+                {/* Score */}
+                <Box>
+                    <Text 
+                    fontSize="lg" 
+                    fontWeight="bold"
+                    color="orange.400"
+                    >
+                        Score: <Text as="span" color="orange.400">{score}</Text>
+                    </Text>
 
-            {/* Genre Menu */}
-            <Box>
-                <Select
-                    bg="gray.700"
-                    borderColor="#2f9e44"
-                    color="white"
-                    _hover={{ borderColor: 'orange.400' }}
-                    onChange={(e) => onGenreChange(e.target.value)}
-                    width="150px"
-                >
-                    <option value="all">All Genres</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="drama">Drama</option>
-                </Select>
-            </Box>
-            <Spacer />
+                </Box>
 
-            {/* High Score */}
-            <Box>
-                <Text fontSize="lg" color="blue.400">
-                    High Score: <Text as="span" color="blue.400">{highScore}</Text>
-                </Text>
-            </Box>
-        </Flex>
+                {/* Genre Menu */}
+                <Box>
+                    <Select
+                        bg="gray.700"
+                        border="2px solid"
+                        borderColor="#2f9e44"
+                        fontWeight={"bold"}
+                        color="#f4fcf0"
+                        _hover={{ bg: '#00bdfa' }}
+                        onChange={(e) => onGenreChange(e.target.value)}
+                        width="150px"
+                        textAlign={"center"}
+                    >
+                        <option value="all">All Genres</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                    </Select>
+                </Box>
+
+                {/* High Score */}
+                <Box>
+                    <Text fontSize="lg" fontWeight="bold" color="blue.400">
+                        High Score: <Text as="span" color="blue.400">{highScore}</Text>
+                    </Text>
+                </Box>
+            </Flex>
+
+        </Box>
     );
 };
 

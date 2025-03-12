@@ -14,7 +14,7 @@ function App() {
       <Flex direction="column" height="100vh">
 
         {/* Header */}
-        <Box height="84px">
+        <Box height="80px">
           <Header
             score={0}
             highScore={0}

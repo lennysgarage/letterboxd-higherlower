@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Spacer, Link, Image } from '@chakra-ui/react';
+import { Flex, Box, Link, Image } from '@chakra-ui/react';
 import letterboxdLogo from "../assets/letterboxd.png"
 import githubLogo from "../assets/github.png"
 
@@ -9,7 +9,7 @@ const Footer: React.FC<Footer> = () => {
         <Box
             height="40px"
             bg="#14181c"
-            color={"white"}
+            color={"#f4fcf0"}
         >
             <Flex
                 justify="center"
@@ -19,7 +19,7 @@ const Footer: React.FC<Footer> = () => {
             >
 
                 {/* Letterboxd */}
-                <Link href="https://letterboxd.com/lennysgarage/" isExternal _hover={{color: 'orange.400'}}>
+                <Link href="https://letterboxd.com/lennysgarage/" isExternal _hover={{color: '#00b020'}}>
                     <Flex align="center" gap={2}>
                         <Image src={letterboxdLogo} alt="Letterboxd" boxSize="32px"/>
                         My Letterboxd   
@@ -27,7 +27,7 @@ const Footer: React.FC<Footer> = () => {
                 </Link>
 
                 {/* Github */}
-                <Link href="https://github.com/lennysgarage" isExternal _hover={{color: 'orange.400'}}>
+                <Link href="https://github.com/lennysgarage" isExternal _hover={{color: '#00b020'}}>
                 <Flex align="center" gap={2}>
                     <Image src={githubLogo} alt="Github" boxSize="28px"/>
                         My Github   
