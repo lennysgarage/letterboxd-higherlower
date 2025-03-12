@@ -13,6 +13,22 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		const { pathname } = new URL(request.url);
+
+		if (pathname === "/api/newmovie") {
+			const { results } = await env.DB.prepare(
+				`
+				SELECT * FROM Movies 
+				ORDER BY RANDOM()
+				LIMIT 1;
+				`
+			)
+				.all();
+			return Response.json(results);
+		}
+
+		return new Response(
+			"Call it.",
+		);
 	},
 } satisfies ExportedHandler<Env>;
