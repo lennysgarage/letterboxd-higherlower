@@ -19,11 +19,11 @@ const Rating: React.FC<Rating> = ({ rating }) => {
 
     return (
         <Flex align="center">
-            {
+            {/* {
                 [...Array(5)].map((_, index) => (
                     <Star key={index} filled={index < roundedRating} />
                 ))
-            }
+            } */}
                 <Text ml={2} fontSize={"3xl"}>{rating}/5</Text>
         </Flex>
     );

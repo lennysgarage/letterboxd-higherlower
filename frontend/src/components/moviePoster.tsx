@@ -6,16 +6,17 @@ interface MoviePoster {
     movie_url: string;
     rating: number;
     onClick: () => void;
+    border: string;
 }
 
-const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url, rating, onClick }) => {
+const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url, rating, onClick, border }) => {
     // creates a movie poster container.
     return (
         <Box
             gap={40}
         >
             <Box
-                height="370px"
+                height="375px"
                 width="250px"
                 bg="#14181c"
                 color={"#f4fcf0"}
@@ -23,9 +24,9 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                 boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)"
                 overflow="hidden"
                 border="2px"
-                borderColor={"blue.400"}
+                borderColor={border}
                 _hover={{
-                    borderColor: 'orange.400',
+                    borderColor: border === 'blue.400' ? 'orange.400' : border,
                     transform: 'scale(1.20)',
                     transition: 'transform 0.3s ease-in-out, border 0.2s ease-in-out'
                 }}
@@ -45,8 +46,6 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                         width="100%"
                         objectFit="cover"
                     />
-
-
                 </Flex>
             </Box>
             {/* Display movie name */}
