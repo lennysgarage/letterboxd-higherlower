@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Flex, Box, Text, Select } from '@chakra-ui/react';
 
 interface Headers {

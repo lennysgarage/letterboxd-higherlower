@@ -1,18 +1,23 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { Flex, Box, Text, Spacer } from '@chakra-ui/react';
 import PlayBtn from './playBtn'
 
-interface MainArea { }
+interface MainArea { 
+    score: number;
+    setScore: React.Dispatch<React.SetStateAction<number>>;
+}
 
-const MainArea: React.FC<MainArea> = () => {
+const MainArea: React.FC<MainArea> = ({ score, setScore }) => {
     // needs to hold two movie poster containers.
+
     return (
         <Flex
             justify="center"
             align="center"
-            height="100vh"
+            height="80vh"
             direction="column"
         >
-            <PlayBtn />
+            <PlayBtn score={score} setScore={setScore}/>
         </Flex>
 
     );

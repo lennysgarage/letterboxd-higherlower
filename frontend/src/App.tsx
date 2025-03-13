@@ -7,7 +7,7 @@ import MainArea from './components/mainArea'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [score, setScore] = useState(0);
 
   return (
     <ChakraProvider>
@@ -16,7 +16,7 @@ function App() {
         {/* Header */}
         <Box height="80px">
           <Header
-            score={0}
+            score={score}
             highScore={0}
             onGenreChange={() => (null)}
           >
@@ -25,7 +25,7 @@ function App() {
 
         {/* Main Area */}
         <Box flex="1" overflow={"auto"} bg="#456">
-          <MainArea></MainArea>
+          <MainArea score={score} setScore={setScore}></MainArea>
         </Box>
 
         {/* Footer */}
