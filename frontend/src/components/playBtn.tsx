@@ -22,7 +22,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
     const [posterData2, setPosterData2] = useState<{ movie_name: string; poster_url: string; movie_url: string; rating: number } | null>(null);
     const [borderColour1, setBorderColour1] = useState('blue.400');
     const [borderColour2, setBorderColour2] = useState('blue.400');
-    const [isClickDisabled, setIsClickDisabled] = useState(false);  
+    const [isClickDisabled, setIsClickDisabled] = useState(false);
     const [lastWinner, setLastWinner] = useState(0); // after 2 consecutive wins switch poster.
     // new game
 
@@ -78,7 +78,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
         setShowPosters(true);
         setBorderColour1('blue.400');
         setBorderColour2('blue.400');
-        setIsClickDisabled(false); 
+        setIsClickDisabled(false);
     };
 
 
@@ -111,33 +111,35 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
             const loserColor = isWinner ? 'red.400' : 'green.400';
 
             // update poster colours
-            if (winnerPoster === 1) {
-                setBorderColour1(winnerColor);
-                setBorderColour2(loserColor);
-            } else {
-                setBorderColour2(winnerColor);
-                setBorderColour1(loserColor);
-            }
-
-            // update score & poster.
-            if (isWinner) {
-                setScore(score + 1);
-
-                if (score + 1 > highScore) {
-                    setHighScore(score + 1);
-                    sessionStorage.setItem('highScore', (score + 1).toString());
+            setTimeout(() => {
+                if (winnerPoster === 1) {
+                    setBorderColour1(winnerColor);
+                    setBorderColour2(loserColor);
+                } else {
+                    setBorderColour2(winnerColor);
+                    setBorderColour1(loserColor);
                 }
-
-            } else {
-                setTimeout(() => {
-                    setShowPlayAgain(true);
-                    setShowRating(false);
-                    setShowPosters(false);
-                }, 2000)
-            }
+                
+                // update score & poster.
+                if (isWinner) {
+                    setScore(score + 1);
+                    
+                    if (score + 1 > highScore) {
+                        setHighScore(score + 1);
+                        sessionStorage.setItem('highScore', (score + 1).toString());
+                    }
+                    
+                } else {
+                    setTimeout(() => {
+                        setShowPlayAgain(true);
+                        setShowRating(false);
+                        setShowPosters(false);
+                    }, 2000)
+                }
+            }, 1000)
 
             // hide rating
-            setTimeout(() => setShowRating(false), 2500);
+            setTimeout(() => setShowRating(false), 4000);
 
             // reset borders
             setTimeout(() => {
@@ -148,16 +150,16 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                 if (isWinner) {
                     if (winnerPoster === 1) {
                         if (lastWinner === 1) {
-                            setPosterData1(lastWinnerNewPoster);
                             setLastWinner(0); // reset who won last.
+                            setPosterData1(lastWinnerNewPoster);
                         } else { // last winner wasn't poster 1
-                            setLastWinner(1); 
+                            setLastWinner(1);
                         }
                         setPosterData2(newPoster); // Update poster 2 if poster 1 wins
                     } else {
                         if (lastWinner === 2) {
-                            setPosterData2(lastWinnerNewPoster);
                             setLastWinner(0); // reset who won last.
+                            setPosterData2(lastWinnerNewPoster);
                         } else { // last winner wasn't poster 2
                             setLastWinner(2);
                         }
@@ -165,7 +167,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                     }
                 }
                 setIsClickDisabled(false);
-            }, 3000);
+            }, 4000);
         };
 
         if (selectedMovie.rating >= otherMovie.rating) {
@@ -199,16 +201,14 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                 (<Flex justify="center" gap={32} align="center">
                     {posterData1 &&
                         <ScaleFade initialScale={0.9} in={showPosters}>
-                            <Box cursor={"pointer"}>
-                                {
-                                    showRating &&
-                                    <Rating rating={posterData1.rating} />
-                                }
+                            <Box cursor={"pointer"}
+                                position="relative"
+                            >
                                 <MoviePoster
                                     movie_name={posterData1.movie_name}
                                     poster_url={posterData1.poster_url}
                                     movie_url={posterData1.movie_url}
-                                    rating={posterData1.rating}
+                                    rating={(showRating || lastWinner === 1) ? posterData1.rating : -1}
                                     onClick={() => handlePosterClick(1)}
                                     border={borderColour1}
                                 />
@@ -226,15 +226,11 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                     {posterData2 &&
                         <ScaleFade initialScale={0.9} in={showPosters}>
                             <Box cursor={"pointer"}>
-                                {
-                                    showRating &&
-                                    <Rating rating={posterData2.rating} />
-                                }
                                 <MoviePoster
                                     movie_name={posterData2.movie_name}
                                     poster_url={posterData2.poster_url}
                                     movie_url={posterData2.movie_url}
-                                    rating={posterData2.rating}
+                                    rating={(showRating || lastWinner === 2) ? posterData2.rating : -1}
                                     onClick={() => handlePosterClick(2)}
                                     border={borderColour2}
                                 />
