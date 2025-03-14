@@ -22,9 +22,9 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
     const [posterData2, setPosterData2] = useState<{ movie_name: string; poster_url: string; movie_url: string; rating: number } | null>(null);
     const [borderColour1, setBorderColour1] = useState('blue.400');
     const [borderColour2, setBorderColour2] = useState('blue.400');
-    const [isClickDisabled, setIsClickDisabled] = useState(false);  // New state
-
-
+    const [isClickDisabled, setIsClickDisabled] = useState(false);  
+    const [lastWinner, setLastWinner] = useState(0); // after 2 consecutive wins switch poster.
+    // new game
 
     const fetchMoviePoster = async (): Promise<{ movie_name: string; poster_url: string; movie_url: string; rating: number }> => {
         const res = await fetch('http://localhost:8787/api/newmovie');
@@ -73,6 +73,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
         setShowPlayAgain(false);
         setShowRating(false);
         setScore(0);
+        setLastWinner(0);
         fetchInitialPosters();
         setShowPosters(true);
         setBorderColour1('blue.400');
@@ -103,6 +104,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
 
         // load new poster
         const newPoster = await fetchMoviePoster();
+        const lastWinnerNewPoster = await fetchMoviePoster();
 
         const updateBorderAndData = (isWinner: boolean, winnerPoster: number) => {
             const winnerColor = isWinner ? 'green.400' : 'red.400';
@@ -145,8 +147,20 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                 // update to new posters
                 if (isWinner) {
                     if (winnerPoster === 1) {
+                        if (lastWinner === 1) {
+                            setPosterData1(lastWinnerNewPoster);
+                            setLastWinner(0); // reset who won last.
+                        } else { // last winner wasn't poster 1
+                            setLastWinner(1); 
+                        }
                         setPosterData2(newPoster); // Update poster 2 if poster 1 wins
                     } else {
+                        if (lastWinner === 2) {
+                            setPosterData2(lastWinnerNewPoster);
+                            setLastWinner(0); // reset who won last.
+                        } else { // last winner wasn't poster 2
+                            setLastWinner(2);
+                        }
                         setPosterData1(newPoster); // Update poster 1 if poster 2 wins
                     }
                 }
