@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Box, Button, Spinner, Text, ScaleFade } from '@chakra-ui/react';
 import MoviePoster from './moviePoster';
-import Rating from './rating';
 import PlayAgainBtn from './playAgainBtn';
 
 
 interface PlayBtn {
+    genres: string[];
     score: number;
     highScore: number;
     setScore: React.Dispatch<React.SetStateAction<number>>;
@@ -13,7 +13,7 @@ interface PlayBtn {
 
 }
 
-const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }) => {
+const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHighScore }) => {
     const [showPosters, setShowPosters] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showRating, setShowRating] = useState(false);
@@ -24,16 +24,23 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
     const [borderColour2, setBorderColour2] = useState('blue.400');
     const [isClickDisabled, setIsClickDisabled] = useState(false);
     const [lastWinner, setLastWinner] = useState(0); // after 2 consecutive wins switch poster.
-    // new game
 
     const fetchMoviePoster = async (): Promise<{ movie_name: string; poster_url: string; movie_url: string; rating: number }> => {
-        const res = await fetch('http://localhost:8787/api/newmovie');
+        const res = await fetch('http://localhost:8787/api/newmovie', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "genres": genres
+            })
+        });
         const data = await res.json();
         return {
-            movie_name: data[0].movie_name,
-            poster_url: data[0].poster_url,
-            movie_url: data[0].movie_url,
-            rating: data[0].rating,
+            movie_name: data.movie_name,
+            poster_url: data.poster_url,
+            movie_url: data.movie_url,
+            rating: data.rating,
         };
     }
 
@@ -119,16 +126,16 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }
                     setBorderColour2(winnerColor);
                     setBorderColour1(loserColor);
                 }
-                
+
                 // update score & poster.
                 if (isWinner) {
                     setScore(score + 1);
-                    
+
                     if (score + 1 > highScore) {
                         setHighScore(score + 1);
                         sessionStorage.setItem('highScore', (score + 1).toString());
                     }
-                    
+
                 } else {
                     setTimeout(() => {
                         setShowPlayAgain(true);

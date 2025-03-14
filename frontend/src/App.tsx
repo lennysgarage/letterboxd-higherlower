@@ -9,6 +9,8 @@ import MainArea from './components/mainArea'
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>(['action', 'adventure', 'animation', 'crime', 'documentary', 'drama', 'family', 'fantasy', 'history', 'horror', 'music', 'mystery', 'romance', 'science-fiction', 'thriller', 'war', 'western']);
+
 
   return (
     <ChakraProvider>
@@ -20,13 +22,14 @@ function App() {
             score={score}
             highScore={highScore}
             onGenreChange={() => (null)}
+            selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres}
           >
           </Header>
         </Box>
 
         {/* Main Area */}
         <Box flex="1" overflow={"auto"} bg="#456">
-          <MainArea score={score} setScore={setScore} highScore={highScore} setHighScoreScore={setHighScore}></MainArea>
+          <MainArea genres={selectedGenres} score={score} setScore={setScore} highScore={highScore} setHighScoreScore={setHighScore}></MainArea>
         </Box>
 
         {/* Footer */}

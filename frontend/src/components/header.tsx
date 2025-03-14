@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Box, Text, Select } from '@chakra-ui/react';
+import { Flex, Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import GenreMenu from './genreMenu';
 
 
 interface Headers {
+    selectedGenres: string[];
+    setSelectedGenres: any;
     score: number;
     highScore: number;
     onGenreChange: (value: string) => void; // i have no idea rn
 }
 
-const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
+const Header: React.FC<Headers> = ({ score, highScore, selectedGenres, setSelectedGenres }) => {
     const [prevScore, setPrevScore] = useState(score);
     const [isAnimating, setIsAnimating] = useState(false);
     const [isAnimatingHighScore, setIsAnimatingHighScore] = useState(false);
@@ -69,21 +72,10 @@ const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
 
                 {/* Genre Menu */}
                 <Box>
-                    <Select
-                        bg="gray.700"
-                        border="2px solid"
-                        borderColor="#2f9e44"
-                        fontWeight={"bold"}
-                        color="#f4fcf0"
-                        _hover={{ bg: '#00bdfa' }}
-                        onChange={(e) => onGenreChange(e.target.value)}
-                        width="150px"
-                        textAlign={"center"}
-                    >
-                        <option value="all">All Genres</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="drama">Drama</option>
-                    </Select>
+                    <GenreMenu
+                        selectedGenres={selectedGenres}
+                        setSelectedGenres={setSelectedGenres}
+                    />
                 </Box>
 
                 {/* High Score */}
