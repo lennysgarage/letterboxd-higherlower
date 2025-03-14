@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Box, Text, Select } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+
 
 interface Headers {
     score: number;
@@ -8,11 +10,35 @@ interface Headers {
 }
 
 const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
+    const [prevScore, setPrevScore] = useState(score);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [isAnimatingHighScore, setIsAnimatingHighScore] = useState(false);
+
+    useEffect(() => {
+        if (score !== prevScore) {
+            setIsAnimating(true);
+            setPrevScore(score);
+            setTimeout(() => {
+                setIsAnimating(false)
+            }, 400);
+        }
+
+        if (score === highScore) {
+            setIsAnimatingHighScore(true);
+            setTimeout(() => {
+                setIsAnimatingHighScore(false)
+            }, 400);
+        }
+    }, [score, prevScore, highScore]);
+
+
     return (
         <Box
             height="80px"
             bg="#14181c"
             color={"#f4fcf0"}
+            alignContent={"center"}
+            justifyContent={"center"}
         >
             <Flex
                 justify={"center"}
@@ -23,13 +49,21 @@ const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
 
                 {/* Score */}
                 <Box>
-                    <Text 
-                    fontSize="lg" 
-                    fontWeight="bold"
-                    color="orange.400"
+                    <motion.div
+                        initial={{ scale: 1.4 }}
+                        animate={{
+                            scale: isAnimating ? 1.7 : 1.4
+                        }}
+                        transition={{ duration: 0.4 }}
                     >
-                        Score: <Text as="span" color="orange.400">{score}</Text>
-                    </Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color="orange.400"
+                        >
+                            Score: <Text as="span" color="orange.400">{score}</Text>
+                        </Text>
+                    </motion.div>
 
                 </Box>
 
@@ -53,10 +87,18 @@ const Header: React.FC<Headers> = ({ score, highScore, onGenreChange }) => {
                 </Box>
 
                 {/* High Score */}
-                <Box>
-                    <Text fontSize="lg" fontWeight="bold" color="blue.400">
-                        High Score: <Text as="span" color="blue.400">{highScore}</Text>
-                    </Text>
+                <Box ml={2} alignContent={"center"}>
+                    <motion.div
+                        initial={{ scale: 1.4 }}
+                        animate={{
+                            scale: isAnimatingHighScore ? 1.7 : 1.4
+                        }}
+                        transition={{ duration: 0.4 }}
+                    >
+                        <Text fontSize="lg" fontWeight="bold" color="blue.400">
+                            High Score: <Text as="span" color="blue.400">{highScore}</Text>
+                        </Text>
+                    </motion.div>
                 </Box>
             </Flex>
 

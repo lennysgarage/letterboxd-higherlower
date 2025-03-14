@@ -23,7 +23,7 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                 borderRadius="8px"
                 boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)"
                 overflow="hidden"
-                border="2px"
+                border="4px"
                 borderColor={border}
                 _hover={{
                     borderColor: border === 'blue.400' ? 'orange.400' : border,
@@ -42,16 +42,25 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                     <Image
                         src={poster_url}
                         alt="Movie Poster"
-                        height="center"
+                        height="100%"
                         width="100%"
                         objectFit="cover"
                     />
                 </Flex>
             </Box>
             {/* Display movie name */}
-            {/* need to update link */}
-            <Link href={movie_url} isExternal _hover={{ color: '#00b020' }}>
-                <Text mt="4" fontStyle={"bold"} fontSize={"3xl"}>
+            <Link href={movie_url} isExternal  _hover={{ color: '#00b020' }}>
+                <Text
+                    mt="4"
+                    fontStyle={"bold"}
+                    fontSize={"3xl"}
+                    wordBreak={"break-word"}
+                    maxHeight={"375px"}
+                    maxWidth={"250px"}
+                    noOfLines={2}
+                    overflow={"hidden"}
+                    textOverflow={"ellipsis"} 
+                >
                     {movie_name}
                 </Text>
             </Link>

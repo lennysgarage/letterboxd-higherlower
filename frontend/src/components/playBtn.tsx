@@ -7,10 +7,13 @@ import PlayAgainBtn from './playAgainBtn';
 
 interface PlayBtn {
     score: number;
+    highScore: number;
     setScore: React.Dispatch<React.SetStateAction<number>>;
+    setHighScore: React.Dispatch<React.SetStateAction<number>>;
+
 }
 
-const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
+const PlayBtn: React.FC<PlayBtn> = ({ score, setScore, highScore, setHighScore }) => {
     const [showPosters, setShowPosters] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showRating, setShowRating] = useState(false);
@@ -52,8 +55,13 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
 
 
     useEffect(() => {
+        const storedHighScore = sessionStorage.getItem("highScore");
+        if (storedHighScore) {
+            setHighScore(Number(storedHighScore));
+        }
+
         fetchInitialPosters();
-    }, []);
+    }, [setHighScore]);
 
 
     const handlePlayBtnClick = () => {
@@ -112,6 +120,12 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
             // update score & poster.
             if (isWinner) {
                 setScore(score + 1);
+
+                if (score + 1 > highScore) {
+                    setHighScore(score + 1);
+                    sessionStorage.setItem('highScore', (score + 1).toString());
+                }
+
             } else {
                 setTimeout(() => {
                     setShowPlayAgain(true);
@@ -121,7 +135,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
             }
 
             // hide rating
-            setTimeout(() => setShowRating(false), 1500);
+            setTimeout(() => setShowRating(false), 2500);
 
             // reset borders
             setTimeout(() => {
@@ -137,7 +151,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
                     }
                 }
                 setIsClickDisabled(false);
-            }, 4000);
+            }, 3000);
         };
 
         if (selectedMovie.rating >= otherMovie.rating) {
@@ -149,7 +163,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
     }
 
     return (
-        <Flex direction="column" align="center" gap={4}>
+        <Flex direction="column" align="center" justify="center" gap={4}>
             {/* Play Button */}
             {!showPosters && !showPlayAgain && (<Button
                 colorScheme="blackAlpha"
@@ -192,7 +206,6 @@ const PlayBtn: React.FC<PlayBtn> = ({ score, setScore }) => {
                         fontStyle={"bold"}
                         fontSize={"8xl"}
                         color="#f4fcf0"
-
                     >
                         OR
                     </Text>

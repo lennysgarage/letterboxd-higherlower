@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Box, Button, Spinner, Text, ScaleFade } from '@chakra-ui/react';
-import MoviePoster from './moviePoster';
-import Rating from './rating';
+import { Flex, Button } from '@chakra-ui/react';
 
 
 interface PlayAgainBtn {
