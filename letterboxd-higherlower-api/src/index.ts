@@ -30,20 +30,73 @@ export default {
 		const { pathname } = new URL(request.url);
 
 		if (pathname === "/api/newmovie") {
+			let requestBody;
+			try {
+				requestBody = await request.json();
+			} catch(err) {
+				return new Response(null, { 
+					status: 404,
+					headers: { ...corsHeaders }
+				});
+			}
+
+			// send anything if no genres
+			if (!requestBody.genres || requestBody.genres.length === 0) {
+				const { results } = await env.DB.prepare(
+					`
+					SELECT * FROM Movies
+					ORDER BY RANDOM()
+					LIMIT 1;
+					`
+				)
+				.all();
+
+				return new Response(JSON.stringify(results[0]), {
+					headers: { ...corsHeaders }
+				});
+			}
+
+			// get genres
+			if (!Array.isArray(requestBody.genres) || requestBody.genres.length === 0) {
+				return new Response(null, { 
+					headers: { ...corsHeaders }
+				});
+			}
+
+			const genres = requestBody.genres;
+			const genrePlaceholders = genres.map(() => "?").join(", ");
+			
+			// query for a movie from one of the genre's
 			const { results } = await env.DB.prepare(
 				`
-				SELECT * FROM Movies 
+				SELECT * FROM Movies
+				WHERE genre IN (${genrePlaceholders})
 				ORDER BY RANDOM()
 				LIMIT 1;
 				`
 			)
+				.bind(...genres) 
 				.all();
-			return new Response (JSON.stringify(results), {
-				headers: {
-					...corsHeaders,
-				},
+
+			// if nothing. idk
+			if (results.length === 0) {
+				return new Response(
+					JSON.stringify({ error: "No movie found" }),
+					{ status: 404, headers: { ...corsHeaders } }
+				);
+			}
+
+			return new Response(JSON.stringify(results[0]), {
+				headers: { ...corsHeaders },
 			});
 		}
+
+		return new Response(null, { 
+			status: 404,
+			headers: { ...corsHeaders }
+		});
+
+
 
 		// if (pathname === "/api/csv") {
 		// 	try {
@@ -83,9 +136,6 @@ export default {
 		//   }
 	  
 
-		return new Response(
-			"Call it.",
-		);
 	},
 } satisfies ExportedHandler<Env>;
 
