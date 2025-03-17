@@ -48,10 +48,14 @@ const Header: React.FC<Headers> = ({ score, highScore, selectedGenres, setSelect
                 align={"center"}
                 gap={8}
                 height={"100%"}
+                position={"relative"}
+                px={4}
             >
 
                 {/* Score */}
-                <Box>
+                <Box
+                    width={{base: "80px", md: "110px"}}
+                >
                     <motion.div
                         initial={{ scale: 1.4 }}
                         animate={{
@@ -79,7 +83,7 @@ const Header: React.FC<Headers> = ({ score, highScore, selectedGenres, setSelect
                 </Box>
 
                 {/* High Score */}
-                <Box ml={2} alignContent={"center"}>
+                <Box ml={2} alignContent={"center"} width={{base: "80px", md: "120px"}}>
                     <motion.div
                         initial={{ scale: 1.4 }}
                         animate={{
