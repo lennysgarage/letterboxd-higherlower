@@ -18,7 +18,7 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
         >
             <Box
             _hover={{
-                transform: 'scale(1.20)',
+                transform: 'scale(1.15)',
                 transition: 'transform 0.3s ease-in-out, border 0.2s ease-in-out'
             }}
             transition="transform 0.3s ease-in-out, border 0.2s ease-in-out"
