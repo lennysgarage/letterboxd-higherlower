@@ -43,12 +43,12 @@ const GenreMenu: React.FC<GenreMenu> = ({ selectedGenres, setSelectedGenres }) =
                     title='Genres'
                     type='checkbox'
                     value={selectedGenres}
-                    onChange={(newGenres: string[]) => {
+                    onChange={(newGenres: string[] | string) => {
                         setSelectedGenres(newGenres);
                         if (newGenres.length === availableGenres.length) {
                             setSelection('All Genres');
                         } else {
-                            setSelection(newGenres.join(', '));
+                            setSelection((newGenres as string[]).join(', '));
                         }
                     }}
                 >

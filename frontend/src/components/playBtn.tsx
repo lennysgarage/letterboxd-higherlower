@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Box, Button, Spinner, Text, ScaleFade } from '@chakra-ui/react';
+import { Flex, Box, Button, Spinner, Text, ScaleFade, Slide } from '@chakra-ui/react';
 import MoviePoster from './moviePoster';
 import PlayAgainBtn from './playAgainBtn';
 
@@ -26,7 +26,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
     const [lastWinner, setLastWinner] = useState(0); // after 2 consecutive wins switch poster.
 
     const fetchMoviePoster = async (): Promise<{ movie_name: string; poster_url: string; movie_url: string; rating: number }> => {
-        const res = await fetch('http://localhost:8787/api/newmovie', {
+        const res = await fetch('https://letterboxd-higherlower-api.letterboxd-higherlower.workers.dev/api/newmovie', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
                     setTimeout(() => {
                         setShowPlayAgain(true);
                         setShowRating(false);
-                        setShowPosters(false);
+                        // setShowPosters(false);
                     }, 2000)
                 }
             }, 1000)
@@ -249,12 +249,24 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
 
             {
                 showPlayAgain &&
-                <Box
-                    onClick={handlePlayAgain}
-                >
-                    <PlayAgainBtn score={score}>
-                    </PlayAgainBtn>
-                </Box>
+                <Slide direction='left' in={showPlayAgain} style={{ zIndex: 10 }}>
+                    <Box
+                        position="absolute"
+                        top="0"
+                        left="0"
+                        right="0"
+                        bottom="0"
+                        background="rgba(0, 0, 0, 0.5)"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        zIndex={10}
+                        onClick={handlePlayAgain}
+                        >
+                        <PlayAgainBtn score={score}>
+                        </PlayAgainBtn>
+                    </Box>
+                </Slide>
             }
 
             {/* Loading spinner */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Flex, Button } from '@chakra-ui/react';
 
 
@@ -6,12 +6,12 @@ interface PlayAgainBtn {
     score: number;
 }
 
-const PlayAgainBtn: React.FC<PlayAgainBtn> = ({ score }) => {
+const PlayAgainBtn: React.FC<PlayAgainBtn> = ({ }) => {
     return (
         <Flex direction="column" align="center" gap={4}>
             {/* Play Again Button */}
             <Button
-                colorScheme="blackAlpha"
+                colorScheme="green"
                 size="lg"
                 height={"72px"}
                 width={"300px"}
