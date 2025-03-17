@@ -68,7 +68,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
         }
 
         fetchInitialPosters();
-    }, [setHighScore]);
+    }, []);
 
 
     const handlePlayBtnClick = () => {
@@ -109,7 +109,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
         // load rating
         setShowRating(true);
 
-        // load new poster
+        // load new poster (we might need two posters depending on the occasion)
         const newPoster = await fetchMoviePoster();
         const lastWinnerNewPoster = await fetchMoviePoster();
 
