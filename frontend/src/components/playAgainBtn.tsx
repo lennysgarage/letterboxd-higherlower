@@ -13,11 +13,11 @@ const PlayAgainBtn: React.FC<PlayAgainBtn> = ({ }) => {
             <Button
                 colorScheme="green"
                 size={{ base: 'md', lg: 'lg' }}
-                height={{ base: '72px', md: '72px' }}
-                width={{ base: '180px', md: '300px' }}
+                height={{ base: '72px', md: '120px' }}
+                width={{ base: '180px', md: '450px' }}
                 border="2px"
                 borderColor="#2f9e44"
-                fontSize={{base: "6xl", md: '2xl'}}
+                fontSize={{base: "6xl", md: '6xl'}}
                 fontWeight={"bold"}
             >
                 {'PLAY AGAIN'}

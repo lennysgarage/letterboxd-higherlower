@@ -193,11 +193,11 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
                 onClick={handlePlayBtnClick}
                 isLoading={loading}
                 size={{ base: 'md', lg: 'lg' }}
-                height={{ base: '56px', md: '72px' }}
-                width={{ base: '180px', md: '300px' }}
+                height={{ base: '72px', md: '120px' }}
+                width={{ base: '180px', md: '450px' }}
                 border="2px"
                 borderColor="#2f9e44"
-                fontSize={{base: "6xl", md: '4xl'}}
+                fontSize={{base: "4xl", md: '8xl'}}
                 fontWeight={"bold"}
             >
                 {loading ? 'Loading...' : 'PLAY'}
