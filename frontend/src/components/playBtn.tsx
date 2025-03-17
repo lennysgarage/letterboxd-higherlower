@@ -62,7 +62,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
 
 
     useEffect(() => {
-        const storedHighScore = sessionStorage.getItem("highScore");
+        const storedHighScore = localStorage.getItem("highScore");
         if (storedHighScore) {
             setHighScore(Number(storedHighScore));
         }
@@ -133,7 +133,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
 
                     if (score + 1 > highScore) {
                         setHighScore(score + 1);
-                        sessionStorage.setItem('highScore', (score + 1).toString());
+                        localStorage.setItem('highScore', (score + 1).toString());
                     }
 
                 } else {
