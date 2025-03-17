@@ -60,7 +60,7 @@ const Header: React.FC<Headers> = ({ score, highScore, selectedGenres, setSelect
                         transition={{ duration: 0.4 }}
                     >
                         <Text
-                            fontSize="lg"
+                            fontSize={{ base: "sm", md: "lg" }}
                             fontWeight="bold"
                             color="orange.400"
                         >
@@ -87,7 +87,10 @@ const Header: React.FC<Headers> = ({ score, highScore, selectedGenres, setSelect
                         }}
                         transition={{ duration: 0.4 }}
                     >
-                        <Text fontSize="lg" fontWeight="bold" color="blue.400">
+                        <Text
+                            fontSize={{ base: "sm", md: "lg" }}
+                            fontWeight="bold"
+                            color="blue.400">
                             High Score: <Text as="span" color="blue.400">{highScore}</Text>
                         </Text>
                     </motion.div>

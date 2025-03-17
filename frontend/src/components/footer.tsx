@@ -14,7 +14,7 @@ const Footer: React.FC<Footer> = () => {
             <Flex
                 justify="center"
                 align={"center"}
-                gap={8}
+                gap={{base: 4, md: 8 }}
                 height={"100%"}
             >
 

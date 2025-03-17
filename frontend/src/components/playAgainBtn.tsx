@@ -8,16 +8,16 @@ interface PlayAgainBtn {
 
 const PlayAgainBtn: React.FC<PlayAgainBtn> = ({ }) => {
     return (
-        <Flex direction="column" align="center" gap={4}>
+        <Flex direction="column" align="center" justify="center" gap={4} >
             {/* Play Again Button */}
             <Button
                 colorScheme="green"
-                size="lg"
-                height={"72px"}
-                width={"300px"}
+                size={{ base: 'md', lg: 'lg' }}
+                height={{ base: '72px', md: '72px' }}
+                width={{ base: '180px', md: '300px' }}
                 border="2px"
                 borderColor="#2f9e44"
-                fontSize={"4xl"}
+                fontSize={{base: "6xl", md: '2xl'}}
                 fontWeight={"bold"}
             >
                 {'PLAY AGAIN'}

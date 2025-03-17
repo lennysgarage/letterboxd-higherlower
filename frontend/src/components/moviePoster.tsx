@@ -15,7 +15,6 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
     // creates a movie poster container.
     return (
         <Box
-            gap={40}
         >
             <Box
             _hover={{
@@ -26,8 +25,8 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
             >
                 <Rating rating={rating} />
                 <Box
-                    height="375px"
-                    width="250px"
+                    height={{ base: '187px', md: '375px'}}
+                    width={{base: '125px', md: '250px'}}
                     bg="#14181c"
                     color={"#f4fcf0"}
                     borderRadius="8px"
@@ -61,11 +60,11 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                 <Text
                     mt="4"
                     fontStyle={"bold"}
-                    fontSize={"3xl"}
+                    fontSize={{base: "xl", md: "2xl"}}
                     wordBreak={"break-word"}
-                    maxHeight={"375px"}
-                    maxWidth={"250px"}
-                    noOfLines={2}
+                    maxHeight={{ base: '187px', md: '375px'}}
+                    maxWidth={{ base: '125px', md: '250px'}}
+                    noOfLines={1}
                     overflow={"hidden"}
                     textOverflow={"ellipsis"}
                 >

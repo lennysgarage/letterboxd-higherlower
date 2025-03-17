@@ -28,12 +28,12 @@ function App() {
         </Box>
 
         {/* Main Area */}
-        <Box flex="1" overflow={"auto"} bg="#456">
+        <Box flex="1" overflow="auto" bg="#456">
           <MainArea genres={selectedGenres} score={score} setScore={setScore} highScore={highScore} setHighScoreScore={setHighScore}></MainArea>
         </Box>
 
         {/* Footer */}
-        <Box height="40px">
+        <Box height="40px" position={"absolute"} bottom="0" left="0" right="0">
           <Footer></Footer>
         </Box>
 

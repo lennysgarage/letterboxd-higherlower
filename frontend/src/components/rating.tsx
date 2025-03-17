@@ -5,7 +5,7 @@ import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 const Star = ({ filled, half }: { filled: boolean; half?: boolean }) => {
 
     return (
-        <Text fontSize="3xl">
+        <Text fontSize={{base: "xl", md: '3xl'}} >
             {half ? (
                 <FaStarHalfAlt color={"#2f9e44"} />
             ) : filled ? (
@@ -48,7 +48,13 @@ const Rating: React.FC<Rating> = ({ rating, duration = 1000 }) => {
 
     return (
         <ScaleFade initialScale={0.3} in={displayRating > -1}>
-            <Flex align="center" zIndex={2}>
+            <Flex 
+            align="center"
+            zIndex={2}
+            width={{base: '125px', md: '250px'}}
+            overflow={"hidden"}
+            wrap="wrap"
+            >
                 {[...Array(totalStars)].map((_, index) => {
                     if (index < fullStars) {
                         return <Star key={index} filled />;
@@ -58,7 +64,7 @@ const Rating: React.FC<Rating> = ({ rating, duration = 1000 }) => {
                     }
                     return <Star key={index} filled={false} />;
                 })}
-                <Text ml={2} fontSize="3xl">
+                <Text ml={2} fontSize={{base: "xl", md: '3xl'}} overflow={"auto"} whiteSpace="normal">
                     {displayRating.toFixed(2)}/5
                 </Text>
             </Flex>

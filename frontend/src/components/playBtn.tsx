@@ -192,12 +192,12 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
                 colorScheme="blackAlpha"
                 onClick={handlePlayBtnClick}
                 isLoading={loading}
-                size="lg"
-                height={"72px"}
-                width={"300px"}
+                size={{ base: 'md', lg: 'lg' }}
+                height={{ base: '56px', md: '72px' }}
+                width={{ base: '180px', md: '300px' }}
                 border="2px"
                 borderColor="#2f9e44"
-                fontSize={"6xl"}
+                fontSize={{base: "6xl", md: '4xl'}}
                 fontWeight={"bold"}
             >
                 {loading ? 'Loading...' : 'PLAY'}
@@ -205,11 +205,13 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
             )}
 
             {showPosters &&
-                (<Flex justify="center" gap={32} align="center">
+                (<Flex justify="center" align="center" position={"relative"} gap={{ base: 4, md: 32 }}>
                     {posterData1 &&
                         <ScaleFade initialScale={0.9} in={showPosters}>
                             <Box cursor={"pointer"}
                                 position="relative"
+                                justifyContent={"center"}
+                                alignContent={"center"}
                             >
                                 <MoviePoster
                                     movie_name={posterData1.movie_name}
@@ -225,7 +227,7 @@ const PlayBtn: React.FC<PlayBtn> = ({ genres, score, setScore, highScore, setHig
                     }
                     <Text
                         fontStyle={"bold"}
-                        fontSize={"8xl"}
+                        fontSize={{ base: '4xl', md: '8xl' }}
                         color="#f4fcf0"
                     >
                         OR

@@ -31,14 +31,16 @@ const GenreMenu: React.FC<GenreMenu> = ({ selectedGenres, setSelectedGenres }) =
                 fontWeight={"bold"}
                 color="#f4fcf0"
                 _hover={{ bg: '#00bdfa' }}
-                width="150px"
+                width={{base: "100px", md: "150px"}}
                 textAlign={"center"}
+                fontSize={{base: "sm", md: "lg"}}
                 overflow={"hidden"}
+                position={"relative"}
                 textOverflow={"ellipsis"}
             >
                 {selection}
             </MenuButton>
-            <MenuList bg="gray.700" minWidth='240px'>
+            <MenuList bg="gray.700" minWidth={{base: '120px', md: '240px'}}>
                 <MenuOptionGroup
                     title='Genres'
                     type='checkbox'
