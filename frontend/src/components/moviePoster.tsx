@@ -25,8 +25,8 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
             >
                 <Rating rating={rating} />
                 <Box
-                    height={{ base: '187px', md: '375px'}}
-                    width={{base: '125px', md: '250px'}}
+                    height={{ base: '220px', md: '375px'}}
+                    width={{base: '140px', md: '250px'}}
                     bg="#14181c"
                     color={"#f4fcf0"}
                     borderRadius="8px"
@@ -64,7 +64,7 @@ const MoviePoster: React.FC<MoviePoster> = ({ movie_name, poster_url, movie_url,
                     wordBreak={"break-word"}
                     maxHeight={{ base: '187px', md: '375px'}}
                     maxWidth={{ base: '125px', md: '250px'}}
-                    noOfLines={1}
+                    noOfLines={{base: 2, md: 1}}
                     overflow={"hidden"}
                     textOverflow={"ellipsis"}
                 >
