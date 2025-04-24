@@ -9,7 +9,7 @@ import MainArea from './components/mainArea'
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [selectedGenres, setSelectedGenres] = useState<string[]>(['action', 'adventure', 'animation', 'crime', 'documentary', 'drama', 'family', 'fantasy', 'history', 'horror', 'music', 'mystery', 'romance', 'science-fiction', 'thriller', 'war', 'western']);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>(['action', 'adventure', 'animation', 'comedy', 'crime', 'documentary', 'drama', 'family', 'fantasy', 'history', 'horror', 'music', 'mystery', 'romance', 'science-fiction', 'thriller', 'war', 'western']);
 
 
   return (
